@@ -15,7 +15,7 @@ export default async function Home() {
         className="bg-fixed h-screen w-screen flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       ></section>
-      <section className="w-full pt-12 bg-black">
+      <section className="w-full pt-12 bg-[#f0f0f0]">
         <div className="mx-auto container space-y-12 px-4 md:px-6">
           <div className="flex flex-col  items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -33,11 +33,11 @@ export default async function Home() {
               {articles.map((article) => (
                 <article
                   key={article.sys.id}
-                  className="h-full flex flex-col rounded-lg shadow-lg overflow-hidden"
+                  className="h-full flex flex-col shadow-lg overflow-hidden"
                 >
                   <Image
                     alt="placeholder"
-                    className=" object-cover w-full"
+                    className=" object-cover w-full grayscale"
                     height="375"
                     src={article.articleImage.url}
                     width="366"
