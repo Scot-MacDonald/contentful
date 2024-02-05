@@ -28,6 +28,10 @@ export default async function KnowledgeArticlePage({ params }) {
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">
               {article.title}
             </h1>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+              {article.categoryName}
+            </h2>
+
             <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-zinc-400">
               {article.summary}
             </p>
@@ -35,10 +39,10 @@ export default async function KnowledgeArticlePage({ params }) {
           <div className="space-y-8 lg:space-y-10">
             <Image
               alt="Article Image"
-              className="aspect-video w-full overflow-hidden rounded-xl object-cover"
-              height="365"
+              className="max-w-[366px]  w-full  object-cover"
+              height="375"
               src={article.articleImage.url}
-              width="650"
+              width="366"
             />
             <div className="space-y-4 md:space-y-6">
               <div className="space-y-2">

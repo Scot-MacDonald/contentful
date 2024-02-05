@@ -2,6 +2,9 @@ import { getAllArticles } from "@/lib/api";
 import Image from "next/image";
 import Link from "next/link";
 import { draftMode } from "next/headers";
+import { Suspense } from "react";
+import VideoComponent from "@/app/ui/VideoComponent";
+import FadeInAnimation from "./components/FadeInAnimation";
 
 const backgroundImageUrl = "./SEC_1.jpg";
 
@@ -12,11 +15,44 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between  bg-white">
       <section
-        className="bg-fixed h-screen w-screen flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-      ></section>
+        className="relative h-screen w-screen bg-fixed bg-cover bg-center "
+        // style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+      >
+        <div className="space-y-12">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {articles.map((article) => (
+              <article
+                key={article.sys.id}
+                className="h-full flex flex-col shadow-lg overflow-hidden"
+              >
+                <Image
+                  alt="placeholder"
+                  className=" object-cover w-full grayscale"
+                  height="375"
+                  src={article.articleImage.url}
+                  width="366"
+                />
+                <div className="flex-1 p-6">
+                  <Link href={`/articles/${article.slug}`}>
+                    <h3 className="text-2xl font-bold leading-tight text-zinc-900 dark:text-zinc-50  py-4">
+                      {article.title}
+                    </h3>
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <h1 className="text-3xl p-4 font-bold tracking-tighter absolute bottom-0 left-0 sm:text-5xl">
+          Anfang der 1970er regierte in Chile für 1000 Tage das linke Bündnis
+          der Unidad Popular. Gemeinsam mit der Bevölkerung arbeitete es an
+          einem ganz eigenen demokratischen Sozialismus. Daran beteiligt waren
+          auch Unterstütz*erinnen aus aller Welt. Ihnen gewidmet ist diese
+          Website.
+        </h1>
+      </section>
       <section className="w-full pt-12 bg-[#f0f0f0]">
-        <div className="mx-auto container space-y-12 px-4 md:px-6">
+        <div className="mx-auto  space-y-12 px-4 md:px-6">
           <div className="flex flex-col  items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -29,7 +65,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="space-y-12">
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {articles.map((article) => (
                 <article
                   key={article.sys.id}
@@ -72,6 +108,11 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      {/* <section>
+        <Suspense fallback={<p>Loading video...</p>}>
+          <VideoComponent />
+        </Suspense>
+      </section> */}
       <section
         className="bg-fixed h-screen w-screen flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
