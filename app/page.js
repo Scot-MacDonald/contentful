@@ -5,12 +5,13 @@ import { draftMode } from "next/headers";
 import { Suspense } from "react";
 import VideoComponent from "@/app/ui/VideoComponent";
 import FadeInAnimation from "./components/FadeInAnimation";
+import Logo from "./components/Logo";
 
 const backgroundImageUrl = "./SEC_1.jpg";
 
 export default async function Home() {
   const { isEnabled } = draftMode();
-  const articles = await getAllArticles(4, isEnabled);
+  const articles = await getAllArticles(10, isEnabled);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between  bg-white">
@@ -19,26 +20,24 @@ export default async function Home() {
         // style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       >
         <div className="space-y-12">
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-6 p-4">
             {articles.map((article) => (
               <article
                 key={article.sys.id}
                 className="h-full flex flex-col shadow-lg overflow-hidden"
               >
-                <Image
-                  alt="placeholder"
-                  className=" object-cover w-full grayscale"
-                  height="375"
-                  src={article.articleImage.url}
-                  width="366"
-                />
-                <div className="flex-1 p-6">
-                  <Link href={`/articles/${article.slug}`}>
-                    <h3 className="text-2xl font-bold leading-tight text-zinc-900 dark:text-zinc-50  py-4">
-                      {article.title}
-                    </h3>
-                  </Link>
-                </div>
+                <Link href={`/articles/${article.slug}`}>
+                  <h3 className="text-1l bg-[#e7e4df] font-bold leading-tight text-zinc-900 dark:text-zinc-50  p-2">
+                    {article.title}
+                  </h3>
+                  <Image
+                    alt="placeholder"
+                    className=" object-cover w-full grayscale"
+                    height="375"
+                    src={article.articleImage.url}
+                    width="366"
+                  />
+                </Link>
               </article>
             ))}
           </div>
